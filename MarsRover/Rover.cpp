@@ -15,5 +15,6 @@ std::array<int, 2> MarsRover::ReportLocation()
 
 void MarsRover::Move(int gridSquaresToMove)
 {
-    m_yCoordinate = 1;
+    m_yCoordinate += gridSquaresToMove;
+    //use a switch statement with += or -= for this properly?
 }
