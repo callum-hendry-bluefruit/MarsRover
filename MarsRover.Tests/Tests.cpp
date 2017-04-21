@@ -42,5 +42,11 @@ namespace MarsRoverTests
             Assert::AreEqual('N', Opportunity.ReportOrientation());
         }
 
+        TEST_METHOD(Turn_rover_right)
+        {
+            MarsRover Spirit(0, 0, 'N');
+            Spirit.Turn('R');
+            Assert::AreEqual('E', Spirit.ReportOrientation());
+        }
 	};
 }
