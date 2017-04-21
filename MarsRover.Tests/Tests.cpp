@@ -1,17 +1,26 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 
+#include "../MarsRover/Rover.cpp"
+
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace MarsRoverTests
 {		
-	TEST_CLASS(UnitTest1)
+	TEST_CLASS(RoverUnitTests)
 	{
 	public:
 		
-		TEST_METHOD(TestMethod1)
+		TEST_METHOD(Move_rover_north_one_square_from_current_position)
 		{
-			// TODO: Your test code here
+            MarsRover Opportunity(0, 0, 'N');
+            Opportunity.Move(1);
+
+            std::array<int, 2> expectedPosition = { 0,1 };
+            std::array<int, 2> actualPosition = Opportunity.ReportLocation();
+            
+            Assert::AreEqual(expectedPosition[0], actualPosition[0]);
+            Assert::AreEqual(expectedPosition[1], actualPosition[1]);
 		}
 
 	};
