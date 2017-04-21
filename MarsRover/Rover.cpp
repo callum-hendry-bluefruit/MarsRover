@@ -18,3 +18,13 @@ void MarsRover::Move(int gridSquaresToMove)
     m_yCoordinate += gridSquaresToMove;
     //use a switch statement with += or -= for this properly?
 }
+
+void MarsRover::Turn(char direction)
+{
+
+}
+
+char MarsRover::ReportOrientation()
+{
+    return 'Z';
+}

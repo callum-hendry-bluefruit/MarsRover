@@ -8,6 +8,8 @@ public:
     std::array<int, 2> ReportLocation();
 
     void Move(int gridSquaresToMove);
+    void Turn(char direction);
+    char ReportOrientation();
 
 private:
     int m_xCoordinate;
