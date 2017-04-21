@@ -26,5 +26,5 @@ void MarsRover::Turn(char direction)
 
 char MarsRover::ReportOrientation()
 {
-    return 'Z';
+    return 'S';
 }

@@ -35,7 +35,7 @@ namespace MarsRoverTests
         {
             MarsRover Spirit(0, 0, 'N');
             Spirit.Turn('L');
-            Assert::AreEqual('E', Spirit.ReportOrientation());
+            Assert::AreEqual('W', Spirit.ReportOrientation());
         }
 
 	};
