@@ -21,21 +21,28 @@ void MarsRover::Move(int gridSquaresToMove)
 
 void MarsRover::Turn(char direction)
 {
-    switch (m_orientation)
+    if (direction == 'L')
     {
-    case 'N':
-        m_orientation = 'W';
-        break;
-    case 'E':
-        m_orientation = 'N';
-        break;
-    case 'S':
+        switch (m_orientation)
+        {
+        case 'N':
+            m_orientation = 'W';
+            break;
+        case 'E':
+            m_orientation = 'N';
+            break;
+        case 'S':
+            m_orientation = 'E';
+        case 'W':
+            m_orientation = 'S';
+            break;
+        default:
+            break;
+        }
+    }
+    else
+    {
         m_orientation = 'E';
-    case 'W':
-        m_orientation = 'S';
-        break;
-    default:
-        break;
     }
 }
 
