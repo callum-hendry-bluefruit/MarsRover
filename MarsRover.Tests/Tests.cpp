@@ -13,15 +13,23 @@ namespace MarsRoverTests
 		
 		TEST_METHOD(Move_rover_north_one_square_from_current_position)
 		{
-            MarsRover Opportunity(0, 0, 'N');
-            Opportunity.Move(1);
+            MarsRover Spirit(0, 0, 'N');
+            Spirit.Move(1);
 
-            std::array<int, 2> expectedPosition = { 0,1 };
-            std::array<int, 2> actualPosition = Opportunity.ReportLocation();
+            std::array<int, 2> expectedPosition = { 0, 1 };
+            std::array<int, 2> actualPosition = Spirit.ReportLocation();
             
             Assert::AreEqual(expectedPosition[0], actualPosition[0]);
             Assert::AreEqual(expectedPosition[1], actualPosition[1]);
-		}
+
+            MarsRover Opportunity(0, 0, 'N');
+            Opportunity.Move(2);
+            expectedPosition = { 0, 3 };
+            actualPosition = Opportunity.ReportLocation();
+
+            Assert::AreEqual(expectedPosition[0], actualPosition[0]);
+            Assert::AreEqual(expectedPosition[1], actualPosition[1]);
+        }
 
 	};
 }
