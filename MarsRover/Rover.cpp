@@ -20,6 +20,9 @@ void MarsRover::Move(int gridSquaresToMove)
     case 'N':
         m_yCoordinate += gridSquaresToMove;
         break;
+    case 'E':
+        m_xCoordinate = 1;
+        break;
     default:
         break;
     }
