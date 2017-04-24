@@ -42,7 +42,23 @@ void MarsRover::Turn(char direction)
     }
     else
     {
-        m_orientation = 'E';
+        switch (m_orientation)
+        {
+        case 'N':
+            m_orientation = 'E';
+            break;
+        case 'E':
+            m_orientation = 'S';
+            break;
+        case 'S':
+            m_orientation = 'W';
+            break;
+        case 'W':
+            m_orientation = 'N';
+            break;
+        default:
+            break;
+        }
     }
 }
 
