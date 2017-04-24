@@ -131,6 +131,17 @@ namespace MarsRoverTests
             Assert::AreEqual(expectedPosition[0], actualPosition[0]);
             Assert::AreEqual(expectedPosition[1], actualPosition[1]);
             Assert::AreEqual('W', Curiosity.ReportOrientation());
+
+            //Case 2 --------------------------------------------------------
+            MarsRover Opportunity(5, 0, 'N');
+            Opportunity.BulkCommand("1R4");
+
+            expectedPosition = { 1, 1 };
+            actualPosition = Opportunity.ReportLocation();
+
+            Assert::AreEqual(expectedPosition[0], actualPosition[0]);
+            Assert::AreEqual(expectedPosition[1], actualPosition[1]);
+            Assert::AreEqual('W', Opportunity.ReportOrientation());
         }
 	};
 }
