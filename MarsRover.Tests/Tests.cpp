@@ -79,7 +79,7 @@ namespace MarsRoverTests
             MarsRover Spirit(5, 0, 'W');
             Spirit.Move(1);
 
-            std::array<int, 2> expectedPosition = { 1, 0 };
+            std::array<int, 2> expectedPosition = { 4, 0 };
             std::array<int, 2> actualPosition = Spirit.ReportLocation();
 
             Assert::AreEqual(expectedPosition[0], actualPosition[0]);
