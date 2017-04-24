@@ -10,7 +10,7 @@ public:
 
     void Move(int gridSquaresToMove);
     void Turn(char direction);
-    void BulkCommand(std::string bulkCommands);
+    void BulkCommand(std::string commandCollection);
 
     char ReportOrientation();
 

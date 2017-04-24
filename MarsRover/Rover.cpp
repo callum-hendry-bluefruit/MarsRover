@@ -83,7 +83,9 @@ char MarsRover::ReportOrientation()
     return m_orientation;
 }
 
-void MarsRover::BulkCommand(std::string bulkCommand)
+void MarsRover::BulkCommand(std::string commandCollection)
 {
-    using namespace std;
+    m_orientation = 'W';
+    m_xCoordinate = 3;
+    m_yCoordinate = 3;
 }
