@@ -53,10 +53,10 @@ namespace MarsRoverTests
 
         TEST_METHOD(Move_rover_south_from_current_position)
         {
-            MarsRover Spirit(0, 0, 'S');
+            MarsRover Spirit(0, 1, 'S');
             Spirit.Move(1);
 
-            std::array<int, 2> expectedPosition = { 1, 0 };
+            std::array<int, 2> expectedPosition = { 0, 0 };
             std::array<int, 2> actualPosition = Spirit.ReportLocation();
 
             Assert::AreEqual(expectedPosition[0], actualPosition[0]);
