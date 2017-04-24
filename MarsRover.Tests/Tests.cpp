@@ -11,7 +11,7 @@ namespace MarsRoverTests
 	{
 	public:
 		
-		TEST_METHOD(Move_rover_north_one_square_from_current_position)
+		TEST_METHOD(Move_rover_north_from_current_position)
 		{
             MarsRover Spirit(0, 0, 'N');
             Spirit.Move(1);
@@ -31,9 +31,33 @@ namespace MarsRoverTests
             Assert::AreEqual(expectedPosition[1], actualPosition[1]);
         }
 
-        TEST_METHOD(Move_rover_east_one_square_from_current_position)
+        TEST_METHOD(Move_rover_east_from_current_position)
         {
             MarsRover Spirit(0, 0, 'E');
+            Spirit.Move(1);
+
+            std::array<int, 2> expectedPosition = { 1, 0 };
+            std::array<int, 2> actualPosition = Spirit.ReportLocation();
+
+            Assert::AreEqual(expectedPosition[0], actualPosition[0]);
+            Assert::AreEqual(expectedPosition[1], actualPosition[1]);
+        }
+
+        TEST_METHOD(Move_rover_south_from_current_position)
+        {
+            MarsRover Spirit(0, 0, 'S');
+            Spirit.Move(1);
+
+            std::array<int, 2> expectedPosition = { 1, 0 };
+            std::array<int, 2> actualPosition = Spirit.ReportLocation();
+
+            Assert::AreEqual(expectedPosition[0], actualPosition[0]);
+            Assert::AreEqual(expectedPosition[1], actualPosition[1]);
+        }
+
+        TEST_METHOD(Move_rover_west_from_current_position)
+        {
+            MarsRover Spirit(5, 0, 'W');
             Spirit.Move(1);
 
             std::array<int, 2> expectedPosition = { 1, 0 };
