@@ -84,6 +84,15 @@ namespace MarsRoverTests
 
             Assert::AreEqual(expectedPosition[0], actualPosition[0]);
             Assert::AreEqual(expectedPosition[1], actualPosition[1]);
+
+
+            MarsRover Opportunity(5, 0, 'W');
+            Opportunity.Move(2);
+            expectedPosition = { 3, 0 };
+            actualPosition = Opportunity.ReportLocation();
+
+            Assert::AreEqual(expectedPosition[0], actualPosition[0]);
+            Assert::AreEqual(expectedPosition[1], actualPosition[1]);
         }
 
         TEST_METHOD(Turn_rover_left)
