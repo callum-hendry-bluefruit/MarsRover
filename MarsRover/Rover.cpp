@@ -15,7 +15,14 @@ std::array<int, 2> MarsRover::ReportLocation()
 
 void MarsRover::Move(int gridSquaresToMove)
 {
-    m_yCoordinate += gridSquaresToMove;
+    switch (m_orientation)
+    {
+    case 'N':
+        m_yCoordinate += gridSquaresToMove;
+        break;
+    default:
+        break;
+    }
     //use a switch statement with += or -= for this properly?
 }
 
