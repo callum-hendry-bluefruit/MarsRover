@@ -24,7 +24,7 @@ void MarsRover::Move(int gridSquaresToMove)
         m_xCoordinate += gridSquaresToMove;
         break;
     case 'S':
-        m_yCoordinate = 0;
+        m_yCoordinate -= gridSquaresToMove;
         break;
     default:
         break;
