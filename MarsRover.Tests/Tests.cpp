@@ -22,6 +22,7 @@ namespace MarsRoverTests
             Assert::AreEqual(expectedPosition[0], actualPosition[0]);
             Assert::AreEqual(expectedPosition[1], actualPosition[1]);
 
+
             MarsRover Opportunity(0, 0, 'N');
             Opportunity.Move(2);
             expectedPosition = { 0, 2 };
@@ -42,6 +43,7 @@ namespace MarsRoverTests
             Assert::AreEqual(expectedPosition[0], actualPosition[0]);
             Assert::AreEqual(expectedPosition[1], actualPosition[1]);
 
+
             MarsRover Opportunity(0, 0, 'E');
             Opportunity.Move(2);
             expectedPosition = { 2, 0 };
@@ -58,6 +60,15 @@ namespace MarsRoverTests
 
             std::array<int, 2> expectedPosition = { 0, 0 };
             std::array<int, 2> actualPosition = Spirit.ReportLocation();
+
+            Assert::AreEqual(expectedPosition[0], actualPosition[0]);
+            Assert::AreEqual(expectedPosition[1], actualPosition[1]);
+
+
+            MarsRover Opportunity(0, 5, 'S');
+            Opportunity.Move(2);
+            expectedPosition = { 0, 3 };
+            actualPosition = Opportunity.ReportLocation();
 
             Assert::AreEqual(expectedPosition[0], actualPosition[0]);
             Assert::AreEqual(expectedPosition[1], actualPosition[1]);
