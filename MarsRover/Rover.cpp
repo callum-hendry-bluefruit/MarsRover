@@ -82,3 +82,8 @@ char MarsRover::ReportOrientation()
 {
     return m_orientation;
 }
+
+void MarsRover::BulkCommand(std::string bulkCommand)
+{
+    using namespace std;
+}

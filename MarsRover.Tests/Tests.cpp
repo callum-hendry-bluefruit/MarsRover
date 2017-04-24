@@ -10,7 +10,7 @@ namespace MarsRoverTests
 	TEST_CLASS(RoverUnitTests)
 	{
 	public:
-		
+		//Move tests
 		TEST_METHOD(Move_rover_north_from_current_position)
 		{
             MarsRover Spirit(0, 0, 'N');
@@ -95,6 +95,7 @@ namespace MarsRoverTests
             Assert::AreEqual(expectedPosition[1], actualPosition[1]);
         }
 
+        //Turn tests
         TEST_METHOD(Turn_rover_left)
         {
             MarsRover Spirit(0, 0, 'N');
@@ -115,6 +116,21 @@ namespace MarsRoverTests
             MarsRover Opportunity(0, 0, 'S');
             Opportunity.Turn('R');
             Assert::AreEqual('W', Opportunity.ReportOrientation());
+        }
+
+        //Multiple commands parsing & execution
+        TEST_METHOD(Move_forwards_then_turn_and_move_forwards_again_using_a_multiple_command_string)
+        {
+            //Case 1
+            MarsRover Curiosity(5, 0, 'N');
+            Curiosity.BulkCommand("3L2");
+
+            std::array<int, 2> expectedPosition = { 3, 3 };
+            std::array<int, 2> actualPosition = Curiosity.ReportLocation();
+
+            Assert::AreEqual(expectedPosition[0], actualPosition[0]);
+            Assert::AreEqual(expectedPosition[1], actualPosition[1]);
+            Assert::AreEqual('W', Curiosity.ReportOrientation());
         }
 	};
 }

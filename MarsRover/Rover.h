@@ -1,5 +1,6 @@
 #pragma once
 #include <array>
+#include <string>
 
 class MarsRover
 {
@@ -9,6 +10,8 @@ public:
 
     void Move(int gridSquaresToMove);
     void Turn(char direction);
+    void BulkCommand(std::string bulkCommands);
+
     char ReportOrientation();
 
 private:
