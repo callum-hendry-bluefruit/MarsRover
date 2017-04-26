@@ -18,4 +18,7 @@ private:
     int m_xCoordinate;
     int m_yCoordinate;
     char m_orientation;
+
+    bool IsMovementCommand(char command);
+    bool IsDirectionCommand(char command);
 };

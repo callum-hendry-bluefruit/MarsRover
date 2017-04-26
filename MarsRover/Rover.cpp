@@ -85,7 +85,36 @@ char MarsRover::ReportOrientation()
 
 void MarsRover::BulkCommand(std::string commandCollection)
 {
-    m_orientation = 'W';
-    m_xCoordinate = 3;
-    m_yCoordinate = 3;
+    for each (char command in commandCollection)
+    {
+        if (IsMovementCommand(command))
+        {
+            int gridSquaresToMove = command - '0';
+            Move(gridSquaresToMove);
+            continue;
+        }
+        else if (IsDirectionCommand(command))
+        {
+            Turn(command);
+            continue;
+        }
+        else
+        {
+            continue;
+        }
+    }
+}
+
+bool MarsRover::IsMovementCommand(char command)
+{
+    return isdigit(command);
+}
+
+bool MarsRover::IsDirectionCommand(char command)
+{
+    if (command == 'L' || command == 'R')
+    {
+        return true;
+    }
+    return false;
 }
