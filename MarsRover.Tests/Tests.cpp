@@ -141,7 +141,7 @@ namespace MarsRoverTests
 
             Assert::AreEqual(expectedPosition[0], actualPosition[0]);
             Assert::AreEqual(expectedPosition[1], actualPosition[1]);
-            Assert::AreEqual('W', Opportunity.ReportOrientation());
+            Assert::AreEqual('E', Opportunity.ReportOrientation());
         }
 	};
 }
