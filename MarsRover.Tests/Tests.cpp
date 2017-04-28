@@ -136,7 +136,7 @@ namespace MarsRoverTests
             MarsRover Opportunity(5, 0, 'N');
             Opportunity.BulkCommand("1R4");
 
-            expectedPosition = { 1, 1 };
+            expectedPosition = { 9, 1 };
             actualPosition = Opportunity.ReportLocation();
 
             Assert::AreEqual(expectedPosition[0], actualPosition[0]);
