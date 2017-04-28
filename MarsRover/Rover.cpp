@@ -32,11 +32,15 @@ void MarsRover::Move(int gridSquaresToMove)
     default:
         break;
     }
-    //use a switch statement with += or -= for this properly?
 }
 
 void MarsRover::Turn(char direction)
 {
+    if (direction != 'L' && direction != 'R')
+    {
+        return;
+    }
+
     if (direction == 'L')
     {
         switch (m_orientation)
@@ -75,10 +79,6 @@ void MarsRover::Turn(char direction)
         default:
             break;
         }
-    }
-    else
-    {
-        return;
     }
 }
 
