@@ -56,7 +56,7 @@ void MarsRover::Turn(char direction)
             break;
         }
     }
-    else
+    else if (direction == 'R')
     {
         switch (m_orientation)
         {
@@ -75,6 +75,10 @@ void MarsRover::Turn(char direction)
         default:
             break;
         }
+    }
+    else
+    {
+        return;
     }
 }
 
