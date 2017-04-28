@@ -143,5 +143,14 @@ namespace MarsRoverTests
             Assert::AreEqual(expectedPosition[1], actualPosition[1]);
             Assert::AreEqual('E', Opportunity.ReportOrientation());
         }
+
+        //Put a test here for two digit movement numbers. This is currently not supported.
+
+        TEST_METHOD(The_rover_does_nothing_when_it_receives_an_invalid_command)
+        {
+            MarsRover Lyoko(5, 5, 'S');
+            Lyoko.Turn('Z');
+            Assert::AreEqual('S', Lyoko.ReportOrientation());
+        }
 	};
 }
