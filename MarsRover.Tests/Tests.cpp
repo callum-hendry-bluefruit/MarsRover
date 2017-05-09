@@ -144,7 +144,18 @@ namespace MarsRoverTests
             Assert::AreEqual('E', Opportunity.ReportOrientation());
         }
 
-        //Put a test here for two digit movement numbers. This is currently not supported.
+        TEST_METHOD(Multiple_digit_move_command_in_a_bulk_command_is_correctly_counted)
+        {
+            MarsRover Curiosity(5, 0, 'N');
+            Curiosity.BulkCommand("12");
+
+            std::array<int, 2> expectedPosition = { 5, 12 };
+            std::array<int, 2> actualPosition = Curiosity.ReportLocation();
+
+            Assert::AreEqual(expectedPosition[0], actualPosition[0]);
+            Assert::AreEqual(expectedPosition[1], actualPosition[1]);
+            Assert::AreEqual('N', Curiosity.ReportOrientation());
+        }
 
         TEST_METHOD(The_rover_does_nothing_when_it_receives_an_invalid_command)
         {
