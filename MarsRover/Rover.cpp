@@ -89,13 +89,47 @@ char MarsRover::ReportOrientation()
 
 void MarsRover::BulkCommand(std::string commandCollection)
 {
+    bool flag_skipChars = false; //if true, will do nothing until counter and skipToElementCount are sync'd
+    int counter = 0; //Holds current element number
+    int skipToElementCount = 0; //Holds element number to skip to
+
     for each (char command in commandCollection)
     {
+        if (flag_skipChars == true)
+        {
+            if (skipToElementCount > counter)
+            {// if skipToElementCount is larger than counter, go to next iteration of the loop
+                continue;
+            }
+            else
+            {// if equal or larger, set skipChars flag to false and carry on with the loop
+                flag_skipChars = false;
+            }
+        }
         if (IsMovementCommand(command))
         {
-            int gridSquaresToMove = command - '0';
-            Move(gridSquaresToMove);
-            continue;
+            if (IsMovementCommand(commandCollection[(counter + 1)]))
+            {
+                std::array<char, 2> twoDigitBuffer;
+                twoDigitBuffer[0] = command;
+                twoDigitBuffer[1] = commandCollection[(counter + 1)];
+
+                std::string stringBuffer(std::begin(twoDigitBuffer), std::end(twoDigitBuffer));
+                int distanceToMove = std::stoi(stringBuffer);
+
+                Move(distanceToMove);
+
+                flag_skipChars = true;
+                skipToElementCount = (counter + 2);
+
+                continue;
+            }
+            else
+            {
+                int gridSquaresToMove = command - '0';
+                Move(gridSquaresToMove);
+                continue;
+            }   
         }
         else if (IsDirectionCommand(command))
         {
@@ -106,6 +140,7 @@ void MarsRover::BulkCommand(std::string commandCollection)
         {
             continue;
         }
+        counter++;
     }
 }
 
