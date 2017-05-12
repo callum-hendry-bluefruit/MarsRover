@@ -175,7 +175,7 @@ namespace MarsRoverTests
             Assert::AreEqual('S', Lyoko.ReportOrientation());
         }
 
-        TEST_METHOD(Rovers_cannot_leave_the_confines_of_a_25x25_area_and_will_stop_at_the_edge_if_given_a_command_to_move_further_than_the_grid_allows)
+        TEST_METHOD(Rovers_cannot_leave_the_confines_of_a_predefined_area_and_will_stop_at_the_edge_if_given_a_command_to_move_further_than_the_grid_allows)
         {
             MarsRover Lyoko(5, 5, 'S');
             Lyoko.Move(10);
