@@ -155,6 +155,17 @@ namespace MarsRoverTests
             Assert::AreEqual(expectedPosition[0], actualPosition[0]);
             Assert::AreEqual(expectedPosition[1], actualPosition[1]);
             Assert::AreEqual('N', Curiosity.ReportOrientation());
+
+            //Case 2 --------------------------------------------------------
+            MarsRover Opportunity(5, 0, 'N');
+            Opportunity.BulkCommand("88");
+
+            expectedPosition = { 5, 88 };
+            actualPosition = Opportunity.ReportLocation();
+
+            Assert::AreEqual(expectedPosition[0], actualPosition[0]);
+            Assert::AreEqual(expectedPosition[1], actualPosition[1]);
+            Assert::AreEqual('N', Opportunity.ReportOrientation());
         }
 
         TEST_METHOD(The_rover_does_nothing_when_it_receives_an_invalid_command)
