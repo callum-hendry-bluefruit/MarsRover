@@ -174,5 +174,17 @@ namespace MarsRoverTests
             Lyoko.Turn('Z');
             Assert::AreEqual('S', Lyoko.ReportOrientation());
         }
+
+        TEST_METHOD(Rovers_cannot_leave_the_confines_of_a_25x25_area_and_will_stop_at_the_edge_if_given_a_command_to_move_further_than_the_grid_allows)
+        {
+            MarsRover Lyoko(5, 5, 'S');
+            Lyoko.Move(10);
+
+            std::array<int, 2> expectedPosition = { 5, 0 };
+            std::array<int, 2> actualPosition = Lyoko.ReportLocation();
+
+            Assert::AreEqual(expectedPosition[0], actualPosition[0]);
+            Assert::AreEqual(expectedPosition[1], actualPosition[1]);
+        }
 	};
 }
