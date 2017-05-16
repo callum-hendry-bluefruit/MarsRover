@@ -158,9 +158,9 @@ namespace MarsRoverTests
 
             //Case 2 --------------------------------------------------------
             MarsRover Opportunity(5, 0, 'N');
-            Opportunity.BulkCommand("88");
+            Opportunity.BulkCommand("24");
 
-            expectedPosition = { 5, 88 };
+            expectedPosition = { 5, 24 };
             actualPosition = Opportunity.ReportLocation();
 
             Assert::AreEqual(expectedPosition[0], actualPosition[0]);
@@ -185,6 +185,15 @@ namespace MarsRoverTests
 
             Assert::AreEqual(expectedPosition[0], actualPosition[0]);
             Assert::AreEqual(expectedPosition[1], actualPosition[1]);
+
+            MarsRover Solis(5, 5, 'N');
+            Solis.Move(21);
+
+            std::array<int, 2> expectedPositionSolis = { 5, 25 };
+            std::array<int, 2> actualPositionSolis = Solis.ReportLocation();
+
+            Assert::AreEqual(expectedPositionSolis[0], actualPositionSolis[0]);
+            Assert::AreEqual(expectedPositionSolis[1], actualPositionSolis[1]);
         }
 	};
 }

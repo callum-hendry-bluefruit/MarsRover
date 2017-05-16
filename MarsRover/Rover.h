@@ -19,6 +19,8 @@ private:
     int m_yCoordinate;
     char m_orientation;
 
+    const int m_gridLengthX = 25, m_gridHeightY = 25;
+
     bool IsMovementCommand(char command);
     bool IsDirectionCommand(char command);
 };

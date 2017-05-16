@@ -19,16 +19,36 @@ void MarsRover::Move(int gridSquaresToMove)
     {
     case 'N':
         m_yCoordinate += gridSquaresToMove;
+        if (m_yCoordinate > m_gridHeightY)
+        {
+            m_yCoordinate = m_gridHeightY;
+        }
         break;
+
     case 'E':
         m_xCoordinate += gridSquaresToMove;
+        if (m_xCoordinate > m_gridLengthX)
+        {
+            m_xCoordinate = m_gridLengthX;
+        }
         break;
+
     case 'S':
         m_yCoordinate -= gridSquaresToMove;
+        if (m_yCoordinate < 0)
+        {
+            m_yCoordinate = 0;
+        }
         break;
+
     case 'W':
         m_xCoordinate -= gridSquaresToMove;
+        if (m_xCoordinate < 0)
+        {
+            m_xCoordinate = 0;
+        }
         break;
+
     default:
         break;
     }
