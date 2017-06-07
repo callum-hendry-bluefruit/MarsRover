@@ -207,6 +207,14 @@ namespace MarsRoverTests
 
             Assert::AreEqual(expectedPositionOfTemporal[0], actualPositionOfTemporal[0]);
             Assert::AreEqual(expectedPositionOfTemporal[1], actualPositionOfTemporal[1]);
+
+
+            Paradox.Move(1);
+            std::array<int, 2> expectedPositionOfParadox = { 1, 1 };
+            std::array<int, 2> actualPositionOfParadox = Paradox.ReportLocation();
+
+            Assert::AreEqual(expectedPositionOfParadox[0], actualPositionOfParadox[0]);
+            Assert::AreEqual(expectedPositionOfParadox[1], actualPositionOfParadox[1]);
         }
 	};
 }
