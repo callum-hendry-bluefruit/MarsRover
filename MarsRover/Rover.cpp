@@ -52,6 +52,13 @@ void MarsRover::Move(int gridSquaresToMove)
     default:
         break;
     }
+
+    std::array<int, 2> expectedPosition = { 1, 1 };
+    std::array<int, 2> actualPosition = ReportLocation();
+    if (expectedPosition == actualPosition)
+    {
+        m_yCoordinate = 0;
+    }
 }
 
 void MarsRover::Turn(char direction)

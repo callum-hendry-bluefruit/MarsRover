@@ -198,11 +198,11 @@ namespace MarsRoverTests
 
         TEST_METHOD(Rovers_cannot_occupy_the_same_grid)
         {
-            MarsRover Temporal(0, 0, 'N');
-            MarsRover Paradox(0, 1, 'S');
+            MarsRover Temporal(1, 0, 'N');
+            MarsRover Paradox(1, 1, 'S');
 
             Temporal.Move(1);
-            std::array<int, 2> expectedPositionOfTemporal = { 0, 0 };
+            std::array<int, 2> expectedPositionOfTemporal = { 1, 0 };
             std::array<int, 2> actualPositionOfTemporal = Temporal.ReportLocation();
 
             Assert::AreEqual(expectedPositionOfTemporal[0], actualPositionOfTemporal[0]);
