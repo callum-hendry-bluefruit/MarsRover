@@ -1,6 +1,7 @@
 #pragma once
 #include <array>
 #include <string>
+#include <vector>
 
 class MarsRover
 {
@@ -23,4 +24,6 @@ private:
 
     bool IsMovementCommand(char command);
     bool IsDirectionCommand(char command);
+    bool GridOccupancyChecker(std::array<int, 2> positionToCheck);
+    static std::vector<std::array<int, 2>> m_roverLocations;
 };

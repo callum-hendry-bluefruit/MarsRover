@@ -6,6 +6,7 @@
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace MarsRoverTests
+
 {		
 	TEST_CLASS(RoverUnitTests)
 	{
@@ -196,7 +197,7 @@ namespace MarsRoverTests
             Assert::AreEqual(expectedPositionSolis[1], actualPositionSolis[1]);
         }
 
-        TEST_METHOD(Rovers_cannot_occupy_the_same_grid)
+        TEST_METHOD(Rovers_cannot_occupy_the_same_grid_and_will_not_move_with_an_invalid_destination)
         {
             MarsRover Temporal(1, 0, 'N');
             MarsRover Paradox(1, 1, 'S');

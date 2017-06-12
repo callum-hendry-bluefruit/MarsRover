@@ -5,6 +5,9 @@ MarsRover::MarsRover(int x, int y, char orientation)
     m_xCoordinate = x;
     m_yCoordinate = y;
     m_orientation = orientation;
+
+    std::array<int, 2> location = { x, y };
+    m_roverLocations.push_back(location);
 }
 
 std::array<int, 2> MarsRover::ReportLocation()
@@ -15,37 +18,40 @@ std::array<int, 2> MarsRover::ReportLocation()
 
 void MarsRover::Move(int gridSquaresToMove)
 {
+    std::array<int, 2> previousPosition = ReportLocation();
+
+    int xCoordinate = m_xCoordinate, yCoordinate = m_yCoordinate;
     switch (m_orientation)
     {
     case 'N':
-        m_yCoordinate += gridSquaresToMove;
-        if (m_yCoordinate > m_gridHeightY)
+        yCoordinate += gridSquaresToMove;
+        if (yCoordinate > m_gridHeightY)
         {
-            m_yCoordinate = m_gridHeightY;
+            yCoordinate = m_gridHeightY;
         }
         break;
 
     case 'E':
-        m_xCoordinate += gridSquaresToMove;
-        if (m_xCoordinate > m_gridLengthX)
+        xCoordinate += gridSquaresToMove;
+        if (xCoordinate > m_gridLengthX)
         {
-            m_xCoordinate = m_gridLengthX;
+            xCoordinate = m_gridLengthX;
         }
         break;
 
     case 'S':
-        m_yCoordinate -= gridSquaresToMove;
-        if (m_yCoordinate < 0)
+        yCoordinate -= gridSquaresToMove;
+        if (yCoordinate < 0)
         {
-            m_yCoordinate = 0;
+            yCoordinate = 0;
         }
         break;
 
     case 'W':
-        m_xCoordinate -= gridSquaresToMove;
-        if (m_xCoordinate < 0)
+        xCoordinate -= gridSquaresToMove;
+        if (xCoordinate < 0)
         {
-            m_xCoordinate = 0;
+            xCoordinate = 0;
         }
         break;
 
@@ -53,11 +59,16 @@ void MarsRover::Move(int gridSquaresToMove)
         break;
     }
 
-    std::array<int, 2> expectedPosition = { 1, 1 };
-    std::array<int, 2> actualPosition = ReportLocation();
-    if (expectedPosition == actualPosition)
+    std::array<int, 2> newPosition = ReportLocation();
+    if (GridOccupancyChecker(newPosition))
     {
-        m_yCoordinate = 0;
+        m_xCoordinate = previousPosition[0];
+        m_yCoordinate = previousPosition[1];
+    }
+    else
+    {
+        m_xCoordinate = xCoordinate;
+        m_yCoordinate = yCoordinate;
     }
 }
 
@@ -183,4 +194,9 @@ bool MarsRover::IsDirectionCommand(char command)
         return true;
     }
     return false;
+}
+
+bool MarsRover::GridOccupancyChecker(std::array<int, 2> positionToCheck)
+{
+
 }
