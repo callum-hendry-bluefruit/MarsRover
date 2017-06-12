@@ -25,5 +25,10 @@ private:
     bool IsMovementCommand(char command);
     bool IsDirectionCommand(char command);
     bool GridOccupancyChecker(std::array<int, 2> positionToCheck);
+    
+    void UpdateRoverPosition(std::array<int, 2> previousPosition, std::array<int, 2> newPosition);
+
     static std::vector<std::array<int, 2>> m_roverLocations;
 };
+
+std::vector<std::array<int, 2>> MarsRover::m_roverLocations;

@@ -59,7 +59,7 @@ void MarsRover::Move(int gridSquaresToMove)
         break;
     }
 
-    std::array<int, 2> newPosition = ReportLocation();
+    std::array<int, 2> newPosition = { xCoordinate, yCoordinate };
     if (GridOccupancyChecker(newPosition))
     {
         m_xCoordinate = previousPosition[0];
@@ -69,6 +69,9 @@ void MarsRover::Move(int gridSquaresToMove)
     {
         m_xCoordinate = xCoordinate;
         m_yCoordinate = yCoordinate;
+
+        std::array<int, 2> newPosition = { xCoordinate, yCoordinate };
+        UpdateRoverPosition(previousPosition, newPosition);
     }
 }
 
@@ -198,5 +201,25 @@ bool MarsRover::IsDirectionCommand(char command)
 
 bool MarsRover::GridOccupancyChecker(std::array<int, 2> positionToCheck)
 {
+    for (int i = 0; i < m_roverLocations.size(); i++)
+    {
+        if (m_roverLocations[i][0] == positionToCheck[0] && m_roverLocations[i][1] == positionToCheck[1])
+        {
+            return true; //true == something already occupying that grid coord
+        }
+    }
 
+    return false; //false == nothing occupying grid
+}
+
+void MarsRover::UpdateRoverPosition(std::array<int, 2> previousPosition, std::array<int, 2> newPosition)
+{
+    for (int i = 0; i < m_roverLocations.size(); i++)
+    {
+        if (m_roverLocations[i][0] == previousPosition[0] && m_roverLocations[i][1] == previousPosition[1])
+        {
+            m_roverLocations[i][0] = newPosition[0];
+            m_roverLocations[i][1] = newPosition[1];
+        }
+    }
 }
