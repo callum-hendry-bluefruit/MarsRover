@@ -6,7 +6,7 @@
 class MarsRover
 {
 public:
-    MarsRover(int x, int y, char orientation);
+    MarsRover(int x, int y, char orientation, std::string roverName);
     std::array<int, 2> ReportLocation();
 
     void Move(int gridSquaresToMove);
@@ -20,15 +20,10 @@ private:
     int m_yCoordinate;
     char m_orientation;
 
+    std::string m_roverName;
+
     const int m_gridLengthX = 25, m_gridHeightY = 25;
 
     bool IsMovementCommand(char command);
     bool IsDirectionCommand(char command);
-    bool GridOccupancyChecker(std::array<int, 2> positionToCheck);
-    
-    void UpdateRoverPosition(std::array<int, 2> previousPosition, std::array<int, 2> newPosition);
-
-    static std::vector<std::array<int, 2>> m_roverLocations;
 };
-
-std::vector<std::array<int, 2>> MarsRover::m_roverLocations;

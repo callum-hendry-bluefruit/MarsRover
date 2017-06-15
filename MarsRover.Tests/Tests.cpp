@@ -2,6 +2,7 @@
 #include "CppUnitTest.h"
 
 #include "../MarsRover/Rover.cpp"
+#include "../MarsRover/RoverLocationManager.cpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -14,7 +15,7 @@ namespace MarsRoverTests
 		//Move tests
 		TEST_METHOD(Move_rover_north_from_current_position)
 		{
-            MarsRover Spirit(0, 0, 'N');
+            MarsRover Spirit(0, 0, 'N', "Spirit");
             Spirit.Move(1);
 
             std::array<int, 2> expectedPosition = { 0, 1 };
@@ -24,7 +25,7 @@ namespace MarsRoverTests
             Assert::AreEqual(expectedPosition[1], actualPosition[1]);
 
 
-            MarsRover Opportunity(0, 0, 'N');
+            MarsRover Opportunity(0, 0, 'N', "Opportunity");
             Opportunity.Move(2);
             expectedPosition = { 0, 2 };
             actualPosition = Opportunity.ReportLocation();
@@ -35,7 +36,7 @@ namespace MarsRoverTests
 
         TEST_METHOD(Move_rover_east_from_current_position)
         {
-            MarsRover Spirit(0, 0, 'E');
+            MarsRover Spirit(0, 0, 'E', "Spirit");
             Spirit.Move(1);
 
             std::array<int, 2> expectedPosition = { 1, 0 };
@@ -45,7 +46,7 @@ namespace MarsRoverTests
             Assert::AreEqual(expectedPosition[1], actualPosition[1]);
 
 
-            MarsRover Opportunity(0, 0, 'E');
+            MarsRover Opportunity(0, 0, 'E', "Opportunity");
             Opportunity.Move(2);
             expectedPosition = { 2, 0 };
             actualPosition = Opportunity.ReportLocation();
@@ -56,7 +57,7 @@ namespace MarsRoverTests
 
         TEST_METHOD(Move_rover_south_from_current_position)
         {
-            MarsRover Spirit(0, 1, 'S');
+            MarsRover Spirit(0, 1, 'S', "Spirit");
             Spirit.Move(1);
 
             std::array<int, 2> expectedPosition = { 0, 0 };
@@ -66,7 +67,7 @@ namespace MarsRoverTests
             Assert::AreEqual(expectedPosition[1], actualPosition[1]);
 
 
-            MarsRover Opportunity(0, 5, 'S');
+            MarsRover Opportunity(0, 5, 'S', "Opportunity");
             Opportunity.Move(2);
             expectedPosition = { 0, 3 };
             actualPosition = Opportunity.ReportLocation();
@@ -77,7 +78,7 @@ namespace MarsRoverTests
 
         TEST_METHOD(Move_rover_west_from_current_position)
         {
-            MarsRover Spirit(5, 0, 'W');
+            MarsRover Spirit(5, 0, 'W', "Spirit");
             Spirit.Move(1);
 
             std::array<int, 2> expectedPosition = { 4, 0 };
@@ -87,7 +88,7 @@ namespace MarsRoverTests
             Assert::AreEqual(expectedPosition[1], actualPosition[1]);
 
 
-            MarsRover Opportunity(5, 0, 'W');
+            MarsRover Opportunity(5, 0, 'W', "Opportunity");
             Opportunity.Move(2);
             expectedPosition = { 3, 0 };
             actualPosition = Opportunity.ReportLocation();
@@ -96,34 +97,36 @@ namespace MarsRoverTests
             Assert::AreEqual(expectedPosition[1], actualPosition[1]);
         }
 
+
         //Turn tests
         TEST_METHOD(Turn_rover_left)
         {
-            MarsRover Spirit(0, 0, 'N');
+            MarsRover Spirit(0, 0, 'N', "Spirit");
             Spirit.Turn('L');
             Assert::AreEqual('W', Spirit.ReportOrientation());
 
-            MarsRover Opportunity(0, 0, 'E');
+            MarsRover Opportunity(0, 0, 'E', "Opportunity");
             Opportunity.Turn('L');
             Assert::AreEqual('N', Opportunity.ReportOrientation());
         }
 
         TEST_METHOD(Turn_rover_right)
         {
-            MarsRover Spirit(0, 0, 'N');
+            MarsRover Spirit(0, 0, 'N', "Spirit");
             Spirit.Turn('R');
             Assert::AreEqual('E', Spirit.ReportOrientation());
 
-            MarsRover Opportunity(0, 0, 'S');
+            MarsRover Opportunity(0, 0, 'S', "Opportunity");
             Opportunity.Turn('R');
             Assert::AreEqual('W', Opportunity.ReportOrientation());
         }
+
 
         //Multiple commands parsing & execution
         TEST_METHOD(Move_forwards_then_turn_and_move_forwards_again_using_a_multiple_command_string)
         {
             //Case 1
-            MarsRover Curiosity(5, 0, 'N');
+            MarsRover Curiosity(5, 0, 'N', "Curiosity");
             Curiosity.BulkCommand("3L2");
 
             std::array<int, 2> expectedPosition = { 3, 3 };
@@ -134,7 +137,7 @@ namespace MarsRoverTests
             Assert::AreEqual('W', Curiosity.ReportOrientation());
 
             //Case 2 --------------------------------------------------------
-            MarsRover Opportunity(5, 0, 'N');
+            MarsRover Opportunity(5, 0, 'N', "Opportunity");
             Opportunity.BulkCommand("1R4");
 
             expectedPosition = { 9, 1 };
@@ -147,7 +150,7 @@ namespace MarsRoverTests
 
         TEST_METHOD(Multiple_digit_move_command_in_a_bulk_command_is_correctly_counted)
         {
-            MarsRover Curiosity(5, 0, 'N');
+            MarsRover Curiosity(5, 0, 'N', "Curiosity");
             Curiosity.BulkCommand("12");
 
             std::array<int, 2> expectedPosition = { 5, 12 };
@@ -158,7 +161,7 @@ namespace MarsRoverTests
             Assert::AreEqual('N', Curiosity.ReportOrientation());
 
             //Case 2 --------------------------------------------------------
-            MarsRover Opportunity(5, 0, 'N');
+            MarsRover Opportunity(5, 0, 'N', "Opportunity");
             Opportunity.BulkCommand("24");
 
             expectedPosition = { 5, 24 };
@@ -171,15 +174,16 @@ namespace MarsRoverTests
 
         TEST_METHOD(The_rover_does_nothing_when_it_receives_an_invalid_command)
         {
-            MarsRover Lyoko(5, 5, 'S');
+            MarsRover Lyoko(5, 5, 'S', "Lyoko");
             Lyoko.Turn('Z');
             Assert::AreEqual('S', Lyoko.ReportOrientation());
         }
 
+
         //Movement restrictions
         TEST_METHOD(Rovers_cannot_leave_the_confines_of_a_predefined_area_and_will_stop_at_the_edge_if_given_a_command_to_move_further_than_the_grid_allows)
         {
-            MarsRover Lyoko(5, 5, 'S');
+            MarsRover Lyoko(5, 5, 'S', "Lyoko");
             Lyoko.Move(10);
 
             std::array<int, 2> expectedPosition = { 5, 0 };
@@ -188,7 +192,7 @@ namespace MarsRoverTests
             Assert::AreEqual(expectedPosition[0], actualPosition[0]);
             Assert::AreEqual(expectedPosition[1], actualPosition[1]);
 
-            MarsRover Solis(5, 5, 'N');
+            MarsRover Solis(5, 5, 'N', "Solis");
             Solis.Move(21);
 
             std::array<int, 2> expectedPositionSolis = { 5, 25 };
@@ -200,8 +204,8 @@ namespace MarsRoverTests
 
         TEST_METHOD(Rovers_cannot_occupy_the_same_grid_and_will_not_move_with_an_invalid_destination)
         {
-            MarsRover Temporal(1, 0, 'N');
-            MarsRover Paradox(1, 1, 'S');
+            MarsRover Temporal(1, 0, 'N', "Temporal");
+            MarsRover Paradox(1, 1, 'S', "Paradox");
 
             Temporal.Move(1);
             std::array<int, 2> expectedPositionOfTemporal = { 1, 0 };

@@ -1,13 +1,17 @@
 #include "Rover.h"
+#include "RoverLocationManager.h"
 
-MarsRover::MarsRover(int x, int y, char orientation)
+MarsRover::MarsRover(int x, int y, char orientation, std::string roverName)
 {
     m_xCoordinate = x;
     m_yCoordinate = y;
     m_orientation = orientation;
+    m_roverName = roverName;
 
     std::array<int, 2> location = { x, y };
-    m_roverLocations.push_back(location);
+
+    RoverLocationManager LocationManager;
+    LocationManager.RegisterNewRover(roverName, location);
 }
 
 std::array<int, 2> MarsRover::ReportLocation()
@@ -60,7 +64,8 @@ void MarsRover::Move(int gridSquaresToMove)
     }
 
     std::array<int, 2> newPosition = { xCoordinate, yCoordinate };
-    if (GridOccupancyChecker(newPosition))
+    RoverLocationManager LocationManager;
+    if (LocationManager.GridOccupancyChecker(newPosition))
     {
         m_xCoordinate = previousPosition[0];
         m_yCoordinate = previousPosition[1];
@@ -71,7 +76,7 @@ void MarsRover::Move(int gridSquaresToMove)
         m_yCoordinate = yCoordinate;
 
         std::array<int, 2> newPosition = { xCoordinate, yCoordinate };
-        UpdateRoverPosition(previousPosition, newPosition);
+        LocationManager.UpdateRoverPosition(m_roverName, newPosition);
     }
 }
 
@@ -197,29 +202,4 @@ bool MarsRover::IsDirectionCommand(char command)
         return true;
     }
     return false;
-}
-
-bool MarsRover::GridOccupancyChecker(std::array<int, 2> positionToCheck)
-{
-    for (int i = 0; i < m_roverLocations.size(); i++)
-    {
-        if (m_roverLocations[i][0] == positionToCheck[0] && m_roverLocations[i][1] == positionToCheck[1])
-        {
-            return true; //true == something already occupying that grid coord
-        }
-    }
-
-    return false; //false == nothing occupying grid
-}
-
-void MarsRover::UpdateRoverPosition(std::array<int, 2> previousPosition, std::array<int, 2> newPosition)
-{
-    for (int i = 0; i < m_roverLocations.size(); i++)
-    {
-        if (m_roverLocations[i][0] == previousPosition[0] && m_roverLocations[i][1] == previousPosition[1])
-        {
-            m_roverLocations[i][0] = newPosition[0];
-            m_roverLocations[i][1] = newPosition[1];
-        }
-    }
 }
